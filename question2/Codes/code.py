@@ -1,85 +1,91 @@
-import ctypes
 import numpy as np
+import ctypes
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
-# Load the C library
-lib = ctypes.CDLL('./code.so')  # Path to the compiled C library
+# Load the shared object file
+lib = ctypes.CDLL('./code.so')
 
-# Define argument and return types for the C function
-lib.direction_cosines.argtypes = [
-    ctypes.c_float, ctypes.c_float, ctypes.c_float,
-    ctypes.c_float, ctypes.c_float, ctypes.c_float,
-    ctypes.POINTER(ctypes.c_float), ctypes.POINTER(ctypes.c_float), ctypes.POINTER(ctypes.c_float)
-]
+# Define the Vector struct in Python
+class Vector(ctypes.Structure):
+    _fields_ = [("x", ctypes.c_double),
+                ("y", ctypes.c_double),
+                ("z", ctypes.c_double)]
 
-# Function to call the C code to calculate direction cosines
-def calculate_direction_cosines(x1, y1, z1, x2, y2, z2):
-    l = ctypes.c_float()
-    m = ctypes.c_float()
-    n = ctypes.c_float()
+# Specify the return type of the calculate_cosines function
+lib.calculate_cosines.restype = ctypes.POINTER(Vector)
+lib.calculate_cosines.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+
+# Function to draw angle between two vectors
+def draw_angle_between_vectors(v1, v2, ax, text_offset=0):
+    # Normalize the vectors
+    v1 = v1 / np.linalg.norm(v1)
+    v2 = v2 / np.linalg.norm(v2)
     
-    lib.direction_cosines(x1, y1, z1, x2, y2, z2, ctypes.byref(l), ctypes.byref(m), ctypes.byref(n))
-    
-    return l.value, m.value, n.value
+    # Compute the normal vector to the plane defined by v1 and v2
+    normal = np.cross(v1, v2)
+    normal = normal / np.linalg.norm(normal)  # Normalize the normal vector
+
+    # Calculate the angle between the vectors
+    angle_rad = np.arccos(np.dot(v1, v2))
+    angle_deg = np.degrees(angle_rad)  # Convert to degrees
+
+    # Parametrize the arc
+    theta = np.linspace(0, angle_rad, 100)
+    arc_points = np.array([np.cos(t) * v1 + np.sin(t) * np.cross(normal, v1) for t in theta]) / 2
+
+    # Plot the arc
+    ax.plot(arc_points[:, 0], arc_points[:, 1], arc_points[:, 2], 'g', label='Angle Arc')
+
+    # Label the angle in the middle of the arc
+    mid_arc_point = arc_points[len(arc_points) // 2] + (v1 + v2) / 5
+    ax.text(mid_arc_point[0] + text_offset, mid_arc_point[1], mid_arc_point[2], f'{angle_deg:.0f}°', color='purple', fontsize=9)
 
 # Coordinates of points P and Q
 P = np.array([4, 3, -5])
 Q = np.array([-2, 1, 8])
 
-# Call the C function to calculate direction cosines
-l, m, n = calculate_direction_cosines(P[0], P[1], P[2], Q[0], Q[1], Q[2])
-print(f"Direction cosines: l = {l}, m = {m}, n = {n}")
+# Call the C function to get direction cosines
+vector_ptr = lib.calculate_cosines(P[0], P[1], P[2], Q[0], Q[1], Q[2])
+origin = np.array([0, 0, 0])
+vector = np.array([vector_ptr.contents.x, vector_ptr.contents.y, vector_ptr.contents.z]) * 2  # Scale for clarity
 
-# Calculate angles with respect to the axes
-def calculate_angle(cosine_value):
-    return np.degrees(np.arccos(cosine_value))
+print("Direction cosines:")
+print("Cos alpha:", vector_ptr.contents.x)
+print("Cos beta:", vector_ptr.contents.y)
+print("Cos gamma:", vector_ptr.contents.z)
 
-# Angles between the line and the X, Y, Z axes
-angle_x = calculate_angle(l)
-angle_y = calculate_angle(m)
-angle_z = calculate_angle(n)
-
-print(f"Angle with X-axis: {angle_x:.2f} degrees")
-print(f"Angle with Y-axis: {angle_y:.2f} degrees")
-print(f"Angle with Z-axis: {angle_z:.2f} degrees")
-
-# 3D plotting with a more spacious layout
-fig = plt.figure(figsize=(10, 8))  # Larger figure size for better spacing
+# Plotting
+fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-# Plot points P and Q
-ax.scatter(P[0], P[1], P[2], color='red', s=100, label='Point P (4, 3, -5)')  # Increased point size
-ax.scatter(Q[0], Q[1], Q[2], color='blue', s=100, label='Point Q (-2, 1, 8)')
+# Plot the vector and axes
+ax.quiver(*origin, *vector, length=1, color='r', label='Direction Vector')
+ax.quiver(*origin, 0, 0, 2, length=1, color='k', label='Y-axis')
+ax.quiver(*origin, 0, 2, 0, length=1, color='k', label='Z-axis')
+ax.quiver(*origin, 2, 0, 0, length=1, color='k', label='X-axis')
 
-# Plot line joining P and Q
-line = np.array([P, Q])
-ax.plot(line[:, 0], line[:, 1], line[:, 2], color='green', linewidth=2, label='Line PQ')  # Thicker line
+# Draw angle arcs
+draw_angle_between_vectors(np.array([1, 0, 0]), vector, ax)  # Angle with X-axis
+draw_angle_between_vectors(np.array([0, 1, 0]), vector, ax)  # Angle with Y-axis
+draw_angle_between_vectors(np.array([0, 0, 1]), vector, ax)  # Angle with Z-axis
 
-# Plot the coordinate axes with extended limits
-ax.plot([0, 15], [0, 0], [0, 0], color='black', linestyle='--', linewidth=1, label='X-axis')
-ax.plot([0, 0], [0, 15], [0, 0], color='black', linestyle='--', linewidth=1, label='Y-axis')
-ax.plot([0, 0], [0, 0], [0, 15], color='black', linestyle='--', linewidth=1, label='Z-axis')
+# Set limits and labels
+ax.set_xlim([-2, 2])
+ax.set_ylim([-2, 2])
+ax.set_zlim([-2, 2])
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_zlabel('Z-axis')
 
-# Annotate angles clearly at positions closer to the axes
-ax.text(10, 0, 0, f'Angle with X-axis\n{angle_x:.2f}°', color='black', fontsize=12, horizontalalignment='center', verticalalignment='center')
-ax.text(0, 10, 0, f'Angle with Y-axis\n{angle_y:.2f}°', color='black', fontsize=12, horizontalalignment='center', verticalalignment='center')
-ax.text(0, 0, 10, f'Angle with Z-axis\n{angle_z:.2f}°', color='black', fontsize=12, horizontalalignment='center', verticalalignment='center')
+# Add axis labels
+ax.text(1.2, 0, 0, "X", color='k')
+ax.text(0, 1.2, 0, "Y", color='k')
+ax.text(0, 0, 1.2, "Z", color='k')
 
-# Set labels and title
-ax.set_xlabel('X-axis', labelpad=15)
-ax.set_ylabel('Y-axis', labelpad=15)
-ax.set_zlabel('Z-axis', labelpad=15)
-ax.set_title('Line PQ and Angles with Coordinate Axes', pad=20)
-
-# Set extended limits for more space
-ax.set_xlim([-10, 15])
-ax.set_ylim([-10, 15])
-ax.set_zlim([-10, 15])
-
-# Display legend with better spacing
-plt.legend(loc='upper left', fontsize=10)
-
-# Show the plot
+plt.grid(True)
+plt.legend()
 plt.show()
+
+# Free the C pointer
+lib.free_vector(vector_ptr)
 

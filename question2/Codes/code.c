@@ -1,12 +1,37 @@
-void direction_cosines(float x1, float y1, float z1, float x2, float y2, float z2, float *l, float *m, float *n) {
-       float dx = x2 - x1;
-    float dy = y2 - y1;
-    float dz = z2 - z1;
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
-       float magnitude = sqrt(dx*dx + dy*dy + dz*dz);
+typedef struct {
+    double x;
+    double y;
+    double z;
+} Vector;
 
-    
-    *l = dx / magnitude;
-    *m = dy / magnitude;
-    *n = dz / magnitude;
+__attribute__((visibility("default"))) Vector* calculate_cosines(double px, double py, double pz, double qx, double qy, double qz) {
+    // Calculate direction vector PQ
+    double dx = qx - px;
+    double dy = qy - py;
+    double dz = qz - pz;
+
+    // Calculate magnitude
+    double magnitude = sqrt(dx * dx + dy * dy + dz * dz);
+
+    // Allocate memory for the result
+    Vector* result = (Vector*)malloc(sizeof(Vector));
+    if (!result) {
+        return NULL; // Handle memory allocation failure
+    }
+
+    // Calculate direction cosines
+    result->x = dx / magnitude; // Cosine alpha
+    result->y = dy / magnitude; // Cosine beta
+    result->z = dz / magnitude; // Cosine gamma
+
+    return result;
 }
+
+__attribute__((visibility("default"))) void free_vector(Vector* vec) {
+    free(vec);
+}
+
