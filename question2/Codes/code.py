@@ -5,7 +5,13 @@ import matplotlib.pyplot as plt
 # Load the shared object file
 lib = ctypes.CDLL('./code.so')
 
-# Define the Vector struct in Python (matching the C struct definition)
+# Define the Point struct in Python
+class Point(ctypes.Structure):
+    _fields_ = [("x", ctypes.c_double),
+                ("y", ctypes.c_double),
+                ("z", ctypes.c_double)]
+
+# Define the Vector struct in Python
 class Vector(ctypes.Structure):
     _fields_ = [("x", ctypes.c_double),
                 ("y", ctypes.c_double),
@@ -13,14 +19,14 @@ class Vector(ctypes.Structure):
 
 # Specify the return type and argument types for the calculate_cosines function
 lib.calculate_cosines.restype = ctypes.POINTER(Vector)
-lib.calculate_cosines.argtypes = [ctypes.POINTER(Vector), ctypes.POINTER(Vector)]
+lib.calculate_cosines.argtypes = [ctypes.POINTER(Point), ctypes.POINTER(Point)]
 
 # Function to draw angle between two vectors
 def draw_angle_between_vectors(v1, v2, ax, text_offset=0):
     # Normalize the vectors
     v1 = v1 / np.linalg.norm(v1)
     v2 = v2 / np.linalg.norm(v2)
-    
+
     # Compute the normal vector to the plane defined by v1 and v2
     normal = np.cross(v1, v2)
     normal = normal / np.linalg.norm(normal)  # Normalize the normal vector
@@ -40,9 +46,9 @@ def draw_angle_between_vectors(v1, v2, ax, text_offset=0):
     mid_arc_point = arc_points[len(arc_points) // 2] + (v1 + v2) / 5
     ax.text(mid_arc_point[0] + text_offset, mid_arc_point[1], mid_arc_point[2], f'{angle_deg:.0f}°', color='purple', fontsize=9)
 
-# Create Vector instances for points P and Q
-P = Vector(4, 3, -5)
-Q = Vector(-2, 1, 8)
+# Create Point structs for P and Q
+P = Point(4, 3, -5)
+Q = Point(-2, 1, 8)
 
 # Call the C function to get direction cosines
 vector_ptr = lib.calculate_cosines(ctypes.byref(P), ctypes.byref(Q))
