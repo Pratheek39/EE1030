@@ -1,4 +1,3 @@
-
 import numpy as np
 import ctypes
 import matplotlib.pyplot as plt
@@ -6,15 +5,15 @@ import matplotlib.pyplot as plt
 # Load the shared object file
 lib = ctypes.CDLL('./code.so')
 
-# Define the Vector struct in Python
+# Define the Vector struct in Python (matching the C struct definition)
 class Vector(ctypes.Structure):
     _fields_ = [("x", ctypes.c_double),
                 ("y", ctypes.c_double),
                 ("z", ctypes.c_double)]
 
-# Specify the return type of the calculate_cosines function
+# Specify the return type and argument types for the calculate_cosines function
 lib.calculate_cosines.restype = ctypes.POINTER(Vector)
-lib.calculate_cosines.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+lib.calculate_cosines.argtypes = [ctypes.POINTER(Vector), ctypes.POINTER(Vector)]
 
 # Function to draw angle between two vectors
 def draw_angle_between_vectors(v1, v2, ax, text_offset=0):
@@ -41,12 +40,12 @@ def draw_angle_between_vectors(v1, v2, ax, text_offset=0):
     mid_arc_point = arc_points[len(arc_points) // 2] + (v1 + v2) / 5
     ax.text(mid_arc_point[0] + text_offset, mid_arc_point[1], mid_arc_point[2], f'{angle_deg:.0f}°', color='purple', fontsize=9)
 
-# Coordinates of points P and Q
-P = np.array([4, 3, -5])
-Q = np.array([-2, 1, 8])
+# Create Vector instances for points P and Q
+P = Vector(4, 3, -5)
+Q = Vector(-2, 1, 8)
 
 # Call the C function to get direction cosines
-vector_ptr = lib.calculate_cosines(P[0], P[1], P[2], Q[0], Q[1], Q[2])
+vector_ptr = lib.calculate_cosines(ctypes.byref(P), ctypes.byref(Q))
 origin = np.array([0, 0, 0])
 vector = np.array([vector_ptr.contents.x, vector_ptr.contents.y, vector_ptr.contents.z]) * 2  # Scale for clarity
 
