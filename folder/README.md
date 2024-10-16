@@ -1,2 +1,0 @@
-# matgeo
-Matrices in Geometry
