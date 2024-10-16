@@ -1,0 +1,218 @@
+\begin{enumerate}[label=\thesubsection.\arabic*.,ref=\thesubsection.\theenumi]
+\item The equation of a line is given by 
+\begin{align}
+			\label{eq:line-school}
+	y &= mx + c
+	\\
+	\implies \myvec{x \\ y} &= \myvec{x \\ 
+	 mx + c} =\myvec{0 \\ c} + x\myvec{1 \\ m}
+\end{align}
+			yielding 
+\begin{align}
+\label{eq:geo-param}
+	\vec{x} = \vec{h} + \kappa \vec{m}.
+\end{align}
+where $\vec{h}$ is any point on the line and 
+\begin{align}
+			\label{eq:line-school-dir}
+\vec{m} = \myvec{1 \\ m}
+\end{align}
+is the direction vector. 
+\item 
+	For
+\begin{align}
+	\vec{m}^{\top}\vec{n} = 0,
+\end{align}
+\eqref{eq:geo-param}
+	can be expressed as
+\begin{align}
+	\vec{n}^{\top}\vec{x} &= \vec{n}^{\top}\vec{h} + \kappa \vec{n}^{\top}\vec{m}
+	\\
+	\begin{split}
+	\implies	\vec{n}^{\top}\brak{\vec{x}-\vec{h}} &=0 
+	\\
+		\text{or, }
+	\vec{n}^{\top}\vec{x} &= c
+	\end{split}
+	\label{eq:geo-normal}
+\end{align}
+for 
+\begin{align}
+c = 	\vec{n}^{\top}\vec{h}. 
+\end{align}
+where
+\begin{align}
+\vec{n}=\myvec{-m \\ 1}
+			\label{eq:line-school-normal}
+\end{align}
+is defined to be the
+{\em normal vector}
+		of the line.  
+	In 3D, \eqref{eq:geo-normal} represents a plane.
+	\iffalse
+\item 			\eqref{eq:line-school} can also be expressed as
+\begin{align}
+	y - mx &= c 
+	\\
+	\implies \myvec{-m & 1}\myvec{x \\ y} &= c
+\end{align}
+			yielding 
+\begin{align}
+	\label{eq:geo-normal}
+\vec{n}^{\top}\vec{x} &= c
+\end{align}
+		\item 
+and the normal vector is
+\item The equation of a line passing through 
+  \item From \eqref{eq:geo-param}, 
+	  if $\vec{A},\vec{D}$ and $\vec{C}$ are on the same line,
+		\label{prop:lin-dep}
+\begin{align}
+			\vec{D}=\vec{A}+q\vec{m} 
+			\\ 
+			\vec{C}=\vec{D}+p\vec{m} \\
+			\label{eq:collinear} 
+			\implies 	p\brak{\vec{D}-\vec{A}} 
+			+ q\brak{\vec{D}-\vec{C}} = 0, \quad p, q \ne 0 \\ 
+			\implies \vec{D} = \frac{p\vec{A}+q\vec{C}}{p+q} 
+			\end{align} 
+			yielding \eqref{eq:section_formula} upon substituting \begin{align} k = \frac{p}{q}. \end{align} 
+			$\brak{\vec{D}-\vec{A}}, \brak{\vec{D}-\vec{C}}$ 
+		are then said to be {\em linearly dependent}.
+			  \fi
+	\item If $\vec{A}, \vec{B}, \vec{C}$ are collinear,  from \eqref{eq:geo-normal}, \begin{align}
+	 \vec{n}^{\top}\vec{A} &=  c 
+	 \\
+	 \vec{n}^{\top}\vec{B} &=  c 
+	 \\
+	 \vec{n}^{\top}\vec{C} &=  c 
+\end{align}
+which can be expressed as 
+\begin{align}
+		\label{prop:lin-eq}
+	\myvec{ \vec{A} & \vec{B} & \vec{C}}^{\top}\vec{n} = c\myvec{1 \\ 1 \\ 1}
+	\\
+	\equiv \myvec{ \vec{A} & \vec{B} & \vec{C}}^{\top}\vec{n} = \myvec{1 \\ 1 \\ 1}
+		\label{prop:lin-eq-unit-mat},
+	\\
+	\implies 
+	\myvec{ 1 & 1 &1 \\ \vec{A} & \vec{B} & \vec{C}}^{\top}\myvec{\vec{n} \\ -1} &= \vec{0}
+		\label{prop:lin-dep-rank}
+\end{align}
+\iffalse
+yielding
+		\begin{align}
+			\label{eq:line-rank}
+			\rank{\myvec{1 & 1 & 1 \\ \vec{A}& \vec{B}&\vec{C}}} = 2
+		\end{align}
+			  Rank is defined to be the number of linearly indpendent rows or columns of a matrix.
+			  \fi
+		\item
+The equation of a line that does not pass through the origin can be expressed as
+\begin{align}
+	 \vec{n}^{\top}\vec{x} &=   1
+		\label{prop:lin-eq-unit}
+\end{align}
+\item Let the perpendicular distance from the origin to a line be $p$ and the angle made by the perpendicular with the positive $x$-axis be $\theta$.
+	Then 
+\begin{align}
+	p\myvec{\cos \theta \\ \sin \theta}
+\end{align}
+is a point on the line as well as the normal vector.
+Hence, the equation of the line is 
+\begin{align}
+	p\myvec{\cos \theta & \sin \theta}
+	\cbrak{\vec{x}-p\myvec{\cos \theta \\ \sin \theta}} &= 0
+	\\
+	\implies 
+	\myvec{\cos \theta & \sin \theta}
+	\vec{x} &= p
+\label{eq:chapters/11/10/2/8-final}
+\end{align}
+\item Let $\vec{Q}$ be the foot of the perpendicular from $\vec{P}$
+	to the line
+\begin{align}
+			\label{eq:geo-norm-app}
+    \vec{n}^{\top}  \vec{x} = c
+\end{align}
+From
+			\eqref{eq:geo-param}
+\begin{align}
+			\label{eq:geo-param-app}
+	\vec{Q} = \vec{P} + k\vec{n}
+	\\
+	\implies PQ = \norm{\vec{Q} - \vec{P}}=\abs{k} \norm{\vec{n}}
+			\label{eq:geo-param-app-PQ}
+\end{align}
+is the distance from $\vec{Q}$
+to the line in 
+			\eqref{eq:geo-norm-app}.
+			From \eqref{eq:geo-param-app},
+\begin{align}
+	\vec{n}^{\top}  \vec{Q} = \vec{n}^{\top}  \vec{P} + k\norm{\vec{n}}^2
+	\\
+	\implies \abs{k} = 
+	\frac{\abs{\vec{n}^{\top}\brak{\vec{Q} - \vec{P}}}}{\norm{\vec{n}}^2}
+			\label{eq:geo-param-app-k}
+			\\
+	\implies PQ =\abs{k}  
+		\norm{\vec{n}}	=
+	\frac{\abs{\vec{n}^{\top}\vec{P} - c}}{\norm{\vec{n}}}
+			\label{eq:PQ-final}
+\end{align}
+upon substituting from 
+			\eqref{eq:geo-param-app-PQ}.
+\item The foot of the perpendicular is given by
+\begin{align}
+	\label{eq:11/10/3/4/foot_of_perpendicular}
+	\myvec{\vec{m} & \vec{n}}^\top\vec{Q} &= 
+	   \myvec{
+              \vec{m}^\top\vec{P}\\
+	      c
+	      }
+\end{align}
+\item The distance between the parallel lines 
+\begin{align}
+	\label{eq:parallel_lines}
+	\begin{split}
+		\vec{n}^{\top}\vec{x} &= c_1
+		\\
+		\vec{n}^{\top}\vec{x} &= c_2
+	\end{split}
+\end{align}
+is given by 
+\begin{align}
+	\label{eq:dist_lines_2d}
+	d = \frac{\abs{   c_1-c_2 }}{\norm{\vec{n}}}	
+\end{align}
+	\item 
+The reflection of point $\vec{Q}$ w.r.t a line is given by
+\begin{align}
+	\label{eq:11/10/4/22}
+\vec{R} = \vec{Q} -\frac{2\brak{\vec{n}^{\top}\vec{Q}-c}}{\norm{\vec{n}}}\vec{n}
+\end{align}
+\item Code for line in 2D using direction vector
+	\begin{lstlisting}
+	codes/book/linear.py
+\end{lstlisting}
+\item Code for line in 2D using normal vector
+	\begin{lstlisting}
+	codes/book/linorm.py
+\end{lstlisting}
+\item Code for line in 3D
+	\begin{lstlisting}
+	codes/book/points3d.py
+\end{lstlisting}
+\item Code for plane
+	\begin{lstlisting}
+	codes/book/plane.py
+\end{lstlisting}
+\item Code for foot of the perpendicular
+	\begin{lstlisting}
+	codes/book/perp.py
+\end{lstlisting}
+\item Code for intersection of lines
+	\begin{lstlisting}
+	codes/book/linsect.py
+\end{lstlisting}
+\end{enumerate}

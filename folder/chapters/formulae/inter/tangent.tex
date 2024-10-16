@@ -1,0 +1,99 @@
+\begin{enumerate}[label=\thesubsection.\arabic*,ref=\thesubsection.\theenumi]
+\item
+  If $L$ in \eqref{eq:conic_tangent} touches \eqref{eq:conic_quad_form} at exactly one point $\vec{q}$, 
+  \begin{align}
+  \vec{m}^{\top}\brak{\vec{V}\vec{q}+\vec{u}} = 0
+  \label{eq:conic_tangent_mq}
+  \end{align}
+\item
+  Given the point of contact $\vec{q}$, the equation of a tangent to \eqref{eq:conic_quad_form} is 
+  \begin{align}
+  \brak{\vec{V}\vec{q}+\vec{u}}^{\top}\vec{x}+\vec{u}^{\top}\vec{q}+f = 0
+  \label{eq:conic_tangent_final}
+  \end{align}
+\item
+  Given the point of contact $\vec{q}$, the equation of the normal to \eqref{eq:conic_quad_form} is 
+  \begin{align}
+    \brak{\vec{V}\vec{q}+\vec{u}}^{\top}\vec{R}\brak{\vec{x}-\vec{q}} =0
+  \label{eq:conic_normal_final}
+  \end{align}
+\item
+	\label{prop:conic-p-contact-nonparab}
+  If $\vec{V}^{-1}$ exists, given the normal vector $\vec{n}$, the tangent points of contact to \eqref{eq:conic_quad_form} are given by
+\begin{align}
+  \begin{split}
+\vec{q}_i &= \vec{V}^{-1}\brak{\kappa_i \vec{n}-\vec{u}}, i = 1,2
+\\
+\text{where }\kappa_i &= \pm \sqrt{
+\frac{
+f_0
+%\vec{u}^{\top}\vec{V}^{-1}\vec{u}-f
+}
+{
+\vec{n}^{\top}\vec{V}^{-1}\vec{n}
+}
+}
+  \end{split}
+\label{eq:conic_tangent_qk}
+\end{align}
+\item
+  If $\vec{V}$ is not invertible,  given the normal vector $\vec{n}$, the point of contact to \eqref{eq:conic_quad_form} is given by the matrix equation
+\begin{align}
+\label{eq:conic_tangent_q_eigen}
+\myvec{
+\vec{\brak{u+\kappa \vec{n}}}^{\top} \\ \vec{V}
+}
+\vec{q} &= 
+\myvec{
+-f
+\\
+\kappa\vec{n}-\vec{u}
+}
+\\
+\text{where }  \kappa = \frac{\vec{p}_1^{\top}\vec{u}}{\vec{p}_1^{\top}\vec{n}}, \quad \vec{V}\vec{p}_1 &= 0
+\label{eq:conic_tangent_qk_eigen}
+\end{align}
+
+\item For a conic/hyperbola, a line with normal vector $\vec{n}$ cannot be a tangent if 
+	\label{prop:conic-p-contact-nonparab-cond}
+\begin{align}
+\frac{
+\vec{u}^{\top}\vec{V}^{-1}\vec{u}-f
+}
+{
+\vec{n}^{\top}\vec{V}^{-1}\vec{n}
+} < 0
+	\label{eq:conic-p-contact-nonparab-cond}
+\end{align}
+\item For a circle, the points of contact are
+	\begin{align}
+	\vec{q}_{ij} &= \brak{\pm r \frac{\vec{n}_j}{\norm{\vec{n}_j}}-\vec{u}}, \quad i,j = 1,2
+\label{eq:conic_tangent_qk-circ}
+\end{align}
+\item A point $\vec{h}$ lies on a normal to the conic in \eqref{eq:conic_quad_form} 
+	if
+\begin{multline}
+	\label{eq:point_of_tangency-m}
+	\brak{ {\vec{m}^\top(\vec{Vh}+\vec{u})}}^2\brak{\vec{n}^{\top}\vec{V}\vec{n}} 
+	\\
+	- 2\brak{\vec{m}^\top\vec{V}\vec{n}} \brak{ {\vec{m}^\top(\vec{Vh}+\vec{u})}\vec{n}^{\top}\brak{\vec{V}\vec{h}+\vec{u}}} 
+	\\
++  \text{g}\brak{
+  \vec{h}
+	  }\brak{\vec{m}^\top\vec{V}\vec{n}}^2
+%	\vec{h}^{\top}\vec{V}\vec{h} + 2\vec{u}^{\top}\vec{h} +f 
+	= 0
+\end{multline}
+\item  A point $\vec{h}$ lies on a tangent to the conic in \eqref{eq:conic_quad_form} if 
+\begin{align}
+  \vec{m}^{\top}  \sbrak{\brak{\vec{V}\vec{h}+\vec{u}}
+	  \brak{\vec{V}\vec{h}+\vec{u}}^{\top}
+   -\vec{V}
+	  \text{g}\brak{
+  \vec{h}
+	  }
+	  }\vec{m} 
+	  &= 0                                                                                             
+	  \label{eq:h-tangents-cond}
+\end{align}
+\end{enumerate}
