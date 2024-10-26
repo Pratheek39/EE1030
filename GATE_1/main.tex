@@ -1,0 +1,318 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+\usepackage{gvv}                                       
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\usepackage{tikz}
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{2007 AE 52-68}
+\author{AI24BTECH11019-KOTHA PRATHEEK REDDY}
+
+ \maketitle
+%\newpage
+% \bigskip
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+
+
+\numberwithin{equation}{enumi}
+\numberwithin{figure}{enumi}
+\renewcommand{\thetable}{\theenumi}
+\begin{enumerate}
+%q1
+	\item Water emerges from an ogree spillway with velocity $= 13.72$ m/s and depth $= 0.3$m at its toe. The tail water depth required to form a hydraulic jump at the toe is
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 6.48 m
+		\item 5.24 m
+		\item 3.24 m
+		\item 2.24 m
+	\end{enumerate}
+\end{multicols}
+%q2
+	\item The flow of water (mass density = $1000$ kg/$m^3$ and kinematic viscosity = $10^{-6}$ $m^2$/s) in commercial pipe, having equivalent roughness $k_s$, as $0.12$mm, yields an average shear stress at the pipe boundary = $600$ N/$m^2$. The value of $k_s / \delta$ ($\delta$ being the thickness of laminar sub-layer) for this pipe is
+		\begin{multicols}{2}
+	\begin{enumerate}
+		\item 0.25
+		\item 0.50
+		\item 6.0
+		\item 8.0
+	\end{enumerate}
+\end{multicols}
+
+%q3
+	\item A river reach of 2.0 km long with maximum flood discharge of 1000 $m^3/s$ is to be physically modeled in the laboratory where maximum available discharge is 0.20 $m^3/s$. For 
+a geometrically similar model based on equality of Froude number, the length of the river reach (m) in the model is
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 26.4
+		\item 25.0
+		\item 20.5
+		\item 18.0
+	\end{enumerate}
+\end{multicols}
+%q4
+	\item An outlet irrigates an area of $20$ ha. The discharge (l/s) required at this outlet to meet the evaporation transpiration requirement of 20 mm occurring uniformly in 20 days neglecting other field losses is
+		\begin{multicols}{2}
+	\begin{enumerate}
+		\item 2.52
+		\item 2.31
+		\item 2.01
+		\item 1.52
+	\end{enumerate}
+\end{multicols}
+%q5
+	\item A wastewater sample contains $10^{-5.6}$ mmol/l of $OH^{-}$ ions at $25 ^{\circ}C$. The $pH$ of this sample is
+		\begin{multicols}{2}
+	\begin{enumerate}
+		\item 8.6
+		\item 8.4
+		\item 5.6
+		\item 5.4
+	\end{enumerate}
+\end{multicols}
+%q6
+	\item Group $I$ lists estimation methods of some of the water and wastewater quality parameters. Group $II$ lists the indicators used in the estimation methods. Match the estimation
+		methods. Match the estimation method (Group $I$) with the corresponding indicator (Group $II$)\\
+\begin{tabular}{ |l| l|}
+\hline
+Group $I$ &  Group $II$ \\ 
+\hline
+P Azide modified Winkler method for dissolved oxyzen & 1 Erichrome Black T \\
+\hline
+Q Dichromate method for chemical oxyzen demand & 2 Ferrion \\
+\hline
+R EDTA titrimetric method for hardness & 3 Potassium chromate  \\
+\hline
+S Mohr or Argentometric method for chlorides &  4 Starch \\
+\hline
+
+
+\end{tabular}
+	\begin{multicols}{2}
+	\begin{enumerate}
+		\item P-3,Q-2,R-1,S-4
+		\item P-4,Q-2,R-1,S-3
+		\item P-4,Q-1,R-2,S-3
+		\item P-4,Q-2,R-3,S-1
+	\end{enumerate}
+\end{multicols}
+%q7
+	\item Determine the correctness or otherwise of the following \textbf{Assertion \sbrak{a}} and the \textbf{Reason \sbrak{r}}\\
+\textbf{Assertion}: The crown of the outgoing larger diameter sewer is always matched with the crown of incoming smaller diameter sewer.\\
+\textbf{Reason}: It eliminates backing up of sewage in the incoming smaller diameter sewer.
+	\begin{multicols}{2}
+	\begin{enumerate}
+		\item Both \sbrak{a} and \sbrak{r} are true and \sbrak{r} is the correct reason for \sbrak{a}.
+		\item Both \sbrak{a} and \sbrak{r} are true and \sbrak{r} is not the correct reason for \sbrak{a}.
+
+		\item Both \sbrak{a} and \sbrak{r} are false
+		\item  \sbrak{a} is true but \sbrak{r} is false
+
+	\end{enumerate}
+\end{multicols}
+%q8
+	\item The 5-day BOD of a wastewater sample is obtained as 190 mg/l (with k = 0.01 $h^{-1}$). The ultimate oxyzen demand (mg/l) of the sample will be
+	\begin{multicols}{2}
+	\begin{enumerate}
+		\item 3800
+		\item 475
+		\item 271
+		\item 190
+	\end{enumerate}
+\end{multicols}
+%q9
+\item A water treatment plant is required to process 28800 $m^3$/d of raw water (density = 1000 kg/$m^3$, kinematic viscosity = $10^{-6}$ $m^2$/s). The rapid mixing tank imparts a velocity gradient of $900 s^{-1}$ to blend 35 $35$ mg/l of alum with the flow for a detention time for 2 minutes. The power input (W) required for rapid mixing is
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 32.4
+		\item 36
+		\item 324
+		\item 32400
+	\end{enumerate}
+\end{multicols}
+%q10
+	\item Match the Group $I$ (Terminology) with Group $II$ (Defination/Brief Description) for wastewater treatment systems \\ 
+\begin{tabular}{|l|l|}
+	\hline 
+	Group $I$ & Group $II$\\
+	\hline
+	P Primary treatment   & 1 Contaminant removal by physical forces \\
+	\hline
+	Q Secondary treatment & 2 Involving biological and/or chemical reaction\\
+	\hline
+	R Unit operation & 3 Conversion of soluble organic matter to biomass \\
+	\hline
+	S Unit process & 4 Removal of solid materials from incoming wastewater\\
+	\hline
+
+\end{tabular}
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item P-4,Q-3,R-1,S-2
+		\item P-4,Q-3,R-2,S-1
+		\item P-3,Q-4,R-2,S-1
+		\item P-1,Q-2,R-3,S-4
+	\end{enumerate}
+\end{multicols}
+
+
+%q11
+	\item A roundabout is provided with an average entry width of $8.4$ m, width of weaving section as 14 m, and length of the weaving section between channelizing islands as 35 m. The crossing traffic and the total traffinc on the weaving section are 1000 and 2000 PCU per hour respectively. The nearest rounded capacity of the roundabout(in PCU per hour) is
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 3300
+		\item 3700
+		\item 4500
+		\item 5200
+	\end{enumerate}
+\end{multicols}	
+%q12
+	\item Design parameters for a signalized intersection are shown in the figure below. The green time calculated for major and minor roads are 34 and 18 s, respectively 
+\resizebox{0.8\textwidth}{!}{%
+\begin{tikzpicture}
+    \draw (0,0) -- (6,0)--(6,2);
+    \draw (9,2)--(9,0) -- (15,0);
+    \draw (0,-4.5) -- (6,-4.5)--(6,-6.5);
+    \draw (9,-6.5) -- (9,-4.5) -- (15,-4.5);
+    \draw[thick,<->] (2,-0.02) -- (2,-4.48)node[midway,right] {14 m};
+    \draw [thick, ->] (4,-1.5) -- (5,-1.5)node[midway,above] {600VPH};
+    \draw [thick,->] (8.5,1) -- (8.5,0)node[below] {180VPH};
+    \draw [thick,->] (10,-3) -- (9,-3)node[midway,above] {500VPH};
+    \draw [thick, ->] (7,-5.5) -- (7,-4.5)node[above] {180VPH};
+    \draw [thick,<->] (6,-5.6) -- (9,-5.6)node[midway,below] {7 m};
+    \node[align=center] at (0.5,-2) {Major Road\\ 4-lane divided};
+    \node[align=center] at (7,0.5) {Minor \\ Road\\ 2-lane };
+    \node[align=center] at (11,1) {Turns Prohibited};
+    \node[align=center] at (12,-5.5) {VPH: Vehicles per hour};
+    
+    
+\end{tikzpicture}
+}\\
+		The critical lane volume on the major road changes to 440 vehicles per hour per lane and the critical lane volume on the minor road remains unchanged. The green time will
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item increase for the major road and remain same for the minor road
+		\item increase for the major road and decrease for the minor road
+
+		\item decrease for both the roads
+		\item remain unchanged for both the roads
+	\end{enumerate}
+\end{multicols}
+%q13
+	\item It is proposed to widen and strengthen an existing 2-lane NH section as a divided highway. The existing traffic in one direction is 2500 commercial vehicles(CV) per day. The construction will take 1 year. The design CBR of soil subgrade is found to be 5 percent. Given: traffic growth rate for CV = 8 percent, vehicle damage factor = 3.5 (standard axels per CV), design life = 10 years and traffic distribution factors = 0.75. The cumulative standard axels (msa) computed are
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 35
+		\item 37
+		\item 65
+		\item 70
+	\end{enumerate}
+\end{multicols}	
+%q14
+	\item A linear relationship is obserevd between speed and density on a certain section of a highway. The free flow is obserevd to be 80 km per hour and the jam density is estimated as 100 vehicles per km length. Based on the above relationship,the maximum flow expected at this section and the speed at the maximum flow will respectively be
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 8000 vehicles per hour and 80 km per hour
+		\item 8000 vehicles per hour and 25 km per hour
+		\item 2000 vehicles per hour and 80 km per hour
+		\item 2000 vehicles per hour and 40 km per hour
+	\end{enumerate}
+\end{multicols}	
+%q15
+	\item The plan of a survey plotted to a scale of 10 m to 1 cm is reduced in such a way that a line originally 10 cm lo
+		ng now measures 9 cm. The area of the reduced plan is measured as 81 $cm^2$. The actual area ($m^2$) of the survey is
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 10000
+		\item 6561
+		\item 1000
+		\item 656
+	\end{enumerate}
+\end{multicols}	
+%q16
+	\item The lengths and bearings of a closed traverse PQRSP are given below.
+\begin{tabular}{|l|l|l|}
+	\hline
+	 Line & Length (m)   &  Bearing (WCB)  \\
+
+	\hline
+	PQ & 200 & $0^{\circ}$   \\
+	\hline
+	QR & 1000  &$45^{\circ}$  \\
+	\hline
+	RS & 907 & $180^{\circ}$  \\
+	\hline
+	 SP  & ?  & ?  \\
+	\hline
+	
+
+
+
+\end{tabular}
+		
+The missing length and bearing, respectively of the line SP are
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 207 m and $270^{\circ}$
+		\item 707 m and $270^{\circ}$
+		\item 707 m and $180^{\circ}$
+		\item 907 m and $270^{\circ}$
+	\end{enumerate}
+\end{multicols}	
+%q17
+ \item The focal length of the object glass of a tachometer is 200 mm, the distance between the vertical axis of the optical centre of the object glass is 100 mm and the spacing between the upper and lower line of the diaphragm axis is 4 mm. With the line of collimation perfectly horizontal, the staff intercepts are 1 m (top), 2 m (middle), and 3 m (bottom). The horizontal distance (m) between the staff and the instrument station is 
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item 100.3
+		\item 103.0
+		\item 150.0
+		\item 153.0
+	\end{enumerate}
+\end{multicols}	
+
+
+		
+
+\end{enumerate}
+\end{document}
