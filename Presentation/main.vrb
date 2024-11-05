@@ -1,0 +1,12 @@
+The codes in \\
+    \footnotesize
+    \begin{lstlisting}
+https://github.com/Pratheek39/EE1030/tree/c703931a5fffd529b14ab319fcce2a0cf293937c/question2/Codes
+    \end{lstlisting}	
+\\ plot the following figure
+    \begin{figure}[h!]
+   \centering
+   \includegraphics[width=\linewidth]{Figures/Figure_1.png}
+	  \caption{Line joining $\vec{P}$ and $\vec{Q}$}
+   \label{stemplot}
+\end{figure}
