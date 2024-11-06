@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{c+c1}{\PYGZsh{} Call the C function to get direction cosines}
+\PYG{n}{vector\PYGZus{}ptr} \PYG{o}{=} \PYG{n}{lib}\PYG{o}{.}\PYG{n}{calculate\PYGZus{}cosines}\PYG{p}{(}\PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{byref}\PYG{p}{(}\PYG{n}{P}\PYG{p}{),} \PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{byref}\PYG{p}{(}\PYG{n}{Q}\PYG{p}{))}
+\PYG{n}{origin} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{])}
+\PYG{n}{vector} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}\PYG{n}{vector\PYGZus{}ptr}\PYG{o}{.}\PYG{n}{contents}\PYG{o}{.}\PYG{n}{x}\PYG{p}{,} \PYG{n}{vector\PYGZus{}ptr}\PYG{o}{.}\PYG{n}{contents}\PYG{o}{.}\PYG{n}{y}\PYG{p}{,} \PYG{n}{vector\PYGZus{}ptr}\PYG{o}{.}\PYG{n}{contents}\PYG{o}{.}\PYG{n}{z}\PYG{p}{])} \PYG{o}{*} \PYG{l+m+mi}{2}  \PYG{c+c1}{\PYGZsh{} Scale for clarity}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Direction cosines:\PYGZdq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Cos alpha:\PYGZdq{}}\PYG{p}{,} \PYG{n}{vector\PYGZus{}ptr}\PYG{o}{.}\PYG{n}{contents}\PYG{o}{.}\PYG{n}{x}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Cos beta:\PYGZdq{}}\PYG{p}{,} \PYG{n}{vector\PYGZus{}ptr}\PYG{o}{.}\PYG{n}{contents}\PYG{o}{.}\PYG{n}{y}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Cos gamma:\PYGZdq{}}\PYG{p}{,} \PYG{n}{vector\PYGZus{}ptr}\PYG{o}{.}\PYG{n}{contents}\PYG{o}{.}\PYG{n}{z}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Plotting}
+\PYG{n}{fig} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{figure}\PYG{p}{()}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{fig}\PYG{o}{.}\PYG{n}{add\PYGZus{}subplot}\PYG{p}{(}\PYG{l+m+mi}{111}\PYG{p}{,} \PYG{n}{projection}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}3d\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}

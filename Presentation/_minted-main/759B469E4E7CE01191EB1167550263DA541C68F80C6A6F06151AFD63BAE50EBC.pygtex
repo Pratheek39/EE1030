@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+       \PYG{c+c1}{\PYGZsh{} Define the Vector struct in Python}
+\PYG{k}{class} \PYG{n+nc}{Vector}\PYG{p}{(}\PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{Structure}\PYG{p}{):}
+    \PYG{n}{\PYGZus{}fields\PYGZus{}} \PYG{o}{=} \PYG{p}{[(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{p}{,} \PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{c\PYGZus{}double}\PYG{p}{),}
+                \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{p}{,} \PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{c\PYGZus{}double}\PYG{p}{),}
+                \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{p}{,} \PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{c\PYGZus{}double}\PYG{p}{)]}
+\PYG{c+c1}{\PYGZsh{} Specify the return type and argument types for the calculate\PYGZus{}cosines function}
+\PYG{n}{lib}\PYG{o}{.}\PYG{n}{calculate\PYGZus{}cosines}\PYG{o}{.}\PYG{n}{restype} \PYG{o}{=} \PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{POINTER}\PYG{p}{(}\PYG{n}{Vector}\PYG{p}{)}
+\PYG{n}{lib}\PYG{o}{.}\PYG{n}{calculate\PYGZus{}cosines}\PYG{o}{.}\PYG{n}{argtypes} \PYG{o}{=} \PYG{p}{[}\PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{POINTER}\PYG{p}{(}\PYG{n}{Point}\PYG{p}{),} \PYG{n}{ctypes}\PYG{o}{.}\PYG{n}{POINTER}\PYG{p}{(}\PYG{n}{Point}\PYG{p}{)]}
+
+
+\end{Verbatim}

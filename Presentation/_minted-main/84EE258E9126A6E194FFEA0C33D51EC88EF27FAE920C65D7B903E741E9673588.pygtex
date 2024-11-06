@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{	   }\PYG{c+c1}{// Calculate the magnitude of the direction vector}
+\PYG{+w}{    }\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{magnitude}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{dx}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{dx}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{dy}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{dy}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{dz}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{dz}\PYG{p}{);}
+
+
+
+\PYG{+w}{    }\PYG{c+c1}{// Calculate direction cosines}
+\PYG{+w}{    }\PYG{n}{result}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{dx}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{n}{magnitude}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// cos(alpha)}
+\PYG{+w}{    }\PYG{n}{result}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{y}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{dy}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{n}{magnitude}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// cos(beta)}
+\PYG{+w}{    }\PYG{n}{result}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{z}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{dz}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{n}{magnitude}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// cos(gamma)}
+
+
+
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{result}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{// Function to free the allocated vector}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{free\PYGZus{}vector}\PYG{p}{(}\PYG{n}{Vector}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{vec}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{free}\PYG{p}{(}\PYG{n}{vec}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+
+\end{Verbatim}

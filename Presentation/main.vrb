@@ -1,12 +1,21 @@
-The codes in \\
-    \footnotesize
-    \begin{lstlisting}
-https://github.com/Pratheek39/EE1030/tree/c703931a5fffd529b14ab319fcce2a0cf293937c/question2/Codes
-    \end{lstlisting}	
-\\ plot the following figure
-    \begin{figure}[h!]
-   \centering
-   \includegraphics[width=\linewidth]{Figures/Figure_1.png}
-	  \caption{Line joining $\vec{P}$ and $\vec{Q}$}
-   \label{stemplot}
-\end{figure}
+\begin{minted}[bgcolor=bg, linenos, fontsize=\small, breaklines]{python}
+	# Set limits and labels
+ax.set_xlim([-2, 2])
+ax.set_ylim([-2, 2])
+ax.set_zlim([-2, 2])
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_zlabel('Z-axis')
+
+# Add axis labels
+ax.text(1.2, 0, 0, "X", color='k')
+ax.text(0, 1.2, 0, "Y", color='k')
+ax.text(0, 0, 1.2, "Z", color='k')
+
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# Free the C pointer
+lib.free_vector(vector_ptr)
+    \end{minted}
