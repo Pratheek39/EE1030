@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.6)  18 NOV 2024 22:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.6)  18 NOV 2024 22:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -429,32 +429,27 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
-dvips/cm-super/cm-super-ts1.enc}] [2] [3]
+dvips/cm-super/cm-super-ts1.enc}]
+Overfull \hbox (17.89127pt too wide) in paragraph at lines 67--69
+[]\OT1/cmr/m/n/12 The C code for this al-go-rithm is avail-able at: []https://g
+ithub.com/Pratheek39/EE1030/ 
+ []
+
+[2] [3]
 This exam contains 0 questions with 0 parts, 0 subparts, and 0 subsubparts.
-
-Class exam Warning: Point totals have changed. Rerun to get point totals right.
-
-
 (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: D55DBA63611AE2FEEC6CA2E33E22A116;213
-(rerunfilecheck)             After:  7F9F0E4CC070B13447E749E3D5AD7689;1117.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 7F9F0E4CC070B13447E749E3D5AD7689;1117.
  ) 
 Here is how much of TeX's memory you used:
- 10317 strings out of 474222
- 155064 string characters out of 5748734
+ 10322 strings out of 474222
+ 155124 string characters out of 5748734
  1936975 words of memory out of 5000000
- 32472 multiletter control sequences out of 15000+600000
+ 32477 multiletter control sequences out of 15000+600000
  565796 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,10n,79p,319b,510s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -467,10 +462,10 @@ fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (3 pages, 111392 bytes).
+Output written on main.pdf (3 pages, 111947 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 105 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  11 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
 
