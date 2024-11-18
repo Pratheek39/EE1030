@@ -1,173 +1,93 @@
-\documentclass[12pt,letterpaper, onecolumn]{exam}
+\documentclass[12pt,letterpaper,onecolumn]{exam}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage[lmargin=71pt, tmargin=1.2in]{geometry}  %For centering solution box
+\usepackage{hyperref}
+\usepackage[lmargin=71pt, tmargin=1.2in]{geometry} % For centering solution box
 
-% \c\documentclass[12pt,letterpaper, onecolumn]{exam}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage[lmargin=71pt, tmargin=1.2in]{geometry}  %For centering solution box
-
-% \chead{\hline} % Un-comment to draw line below header
-\thispagestyle{empty}   %For removing header/footer from page 1
+% \chead{\hline} % Uncomment to draw a line below the header
+\thispagestyle{empty} % Remove header/footer from the first page
 
 \begin{document}
 
-\begingroup  
+\begingroup
     \centering
-    \LARGE Matrix Theory\\
-    \LARGE Eigenvalue Computation\\[0.5em]
+    \LARGE \textbf{Matrix Theory}\\
+    \LARGE \textbf{Eigenvalue Computation}\\[0.5em]
     
-    \large Kotha Pratheek Reddy\par
+    \large Kotha Pratheek Reddy\\
     \large ai24btech11019\par
-    
 \endgroup
+
 \rule{\textwidth}{0.4pt}
-\pointsdroppedatright   %Self-explanatory
+
+\pointsdroppedatright % Self-explanatory
 \printanswers
-\renewcommand{\solutiontitle}{\noindent\textbf{Ans:}\enspace}   %Replace "Ans:" with starting keyword in solution box
+\renewcommand{\solutiontitle}{\noindent\textbf{Answer:}\enspace} % Customize solution box heading
 
 \section{Algorithms}
-The chosen algorithm is a combination of \textbf{Householder transformation} and \textbf{QR algorithm}, which can compute all eigenvalues of a given matrix with only real eigenvalues.
+The chosen algorithm is a combination of the \textbf{Householder transformation} and the \textbf{QR algorithm}, which computes all eigenvalues of a given matrix guaranteed to have real eigenvalues.
+
 \subsection{QR Algorithm}
 \begin{itemize}
-    \item This algorithm iteratively transforms a matrix into another matrix similar to it by factoring it into a product of an orthogonal matrix $(Q)$ and an upper triangular matrix $(R)$, then updating the original matrix to the product $(RQ)$.
+    \item This algorithm iteratively transforms a matrix into another similar matrix by factoring it into a product of an orthogonal matrix $(Q)$ and an upper triangular matrix $(R)$. The original matrix is updated as the product $(RQ)$:
     \begin{align*}
-        A_0 &= Q_0R_0 \\
-        A_1 &= R_0Q_0 \\
-        A_1 &= Q_2R_1 \\
-        A_2 &= R_1Q_1 \\
+        A_0 &= Q_0R_0, \\
+        A_1 &= R_0Q_0, \\
+        A_1 &= Q_1R_1, \\
+        A_2 &= R_1Q_1, \\
             &\vdots \\
-        A_i &= R_{i-1}Q_{i-1} \\
-        A_i &= Q_iR_i \\ \\
-        A_{j+i} &= Q_j^{-1}A_jQ_j\\
+        A_i &= R_{i-1}Q_{i-1}, \\
+        A_i &= Q_iR_i.
     \end{align*}
-    Since $Q$ is an orthogonal matrix, $Q^{-1}$ can be replaced with $Q^{\top}$
-    \begin{align*}
-        A_{j+1} &= Q_j ^{\top}A_jQ_j
-    \end{align*}
-    The eigenvalues of each $A_j$ remain the same as those of the original matrix due to their similarity.
-    \item The values of $Q$ are found through the Gram-Schmidt process, where projections of preceding vectors are removed from each vector in the matrix. Each vector is then normalized such that the norm of each column is set to 1.
-    \item The iteration continues until $A_j$ converges. It typically converges to triangular matrices, with diagonal entries representing the eigenvalues. The general time complexity of this method is of the order $O(k \cdot n^3)$, where $k$ is the number of iterations and $n$ is the size of the matrix.
+    \item Since $Q$ is orthogonal, $Q^{-1}$ is replaced with $Q^{\top}$. The iterative process becomes:
+    \[
+    A_{j+1} = Q_j^{\top}A_jQ_j.
+    \]
+    The eigenvalues of $A_j$ remain the same as those of the original matrix due to similarity.
+    \item $Q$ is computed using the Gram-Schmidt process, where the projections of preceding vectors are removed from each column vector. Each column is then normalized so that the norm of the column is 1.
+    \item The iteration continues until $A_j$ converges to a triangular matrix, with diagonal entries representing the eigenvalues. The time complexity of this method is $O(k \cdot n^3)$, where $k$ is the number of iterations and $n$ is the matrix size.
 \end{itemize}
 
-\subsection{Householder Transformation.}
+\subsection{Householder Transformation}
 \begin{itemize}
-    \item The QR algorithm works particularly well with Hessenberg matrices. Matrices with all entries below the first sub-diagonal as zero are called lower Hessenberg matrices, while those with zeros above the first upper sub-diagonal are called upper Hessenberg matrices. The QR algorithm also works with other matrices, but the computation becomes more expensive.
-    \item For larger matrices, efficiency can be improved by using Householder reflections, which have a complexity near $O(n^3)$, to transform the matrix into a lower Hessenberg matrix. The QR algorithm can then be applied to this transformed matrix. This significantly reduces the number of iterations required when working with densely filled matrices.
-    \item Householder transformation involves finding a matrix (symmetric and orthogonal) that, when multiplied by a vector, reflects it to another desired vector. For example, if a vector $\mathbf{v_1}$ is to be rotated to $\mathbf{v_2}$ ($\mathbf{v1}$ and $\mathbf{v2}$ must have the same magnitude), and $\mathbf{u}$ is the unit vector along $\mathbf{{v_1} - {v_2}}$, the reflection is carried out by pre-multiplying $\mathbf{v1}$ with $ Q = I - \mathbf{2uu^{T}}$.
-        The $Q$ obtained here is both orthogonal and symmetric. Thus, its inverse is the same as itself.
-    \item At each step, $\mathbf{v_1}$ corresponds to a column of the given matrix, and $\mathbf{v_2}$ is a vector with the first element equal to $||\mathbf{v_1}||$ and the others set to zero. The resulting $Q$ is then extended to match the size of the original matrix by adding zeros in off-diagonal entries and ones in the diagonal entries.
-    \item Let $Q$ be the extended version of the Householder matrix for a certain row. The update is performed iteratively $n$ times as follows:
-    \begin{align*}
-        A_1 &= QA_0Q \\
-        A_0 &:= A_1
-    \end{align*}
-    This is done because $Q = Q^{-1}$.
-    \item In this way, the matrix remains similar to the original matrix, with the elements below the first sub-diagonal set to zero.
-    \item Once the matrix is in Hessenberg form, the QR algorithm can be applied to compute eigenvalues. For larger matrices, the Hessenberg form is much sparser, which accelerates convergence.
+    \item The QR algorithm is particularly efficient for Hessenberg matrices. A Hessenberg matrix has zeros either below (lower Hessenberg) or above (upper Hessenberg) the first sub-diagonal.
+    \item For larger matrices, efficiency is improved by using Householder reflections (with $O(n^3)$ complexity) to transform the matrix into a Hessenberg matrix. This significantly reduces the number of iterations in the QR algorithm.
+    \item A Householder transformation reflects a vector $\mathbf{v_1}$ to another vector $\mathbf{v_2}$ (both with the same magnitude). If $\mathbf{u}$ is the unit vector along $\mathbf{v_1} - \mathbf{v_2}$, the reflection matrix is:
+    \[
+    Q = I - 2\mathbf{uu^{T}}.
+    \]
+    \item $Q$ is symmetric and orthogonal, so $Q^{-1} = Q$.
+    \item At each step, $\mathbf{v_1}$ is chosen as a column vector of the matrix, and $\mathbf{v_2}$ is a vector with the first element equal to $||\mathbf{v_1}||$ and the rest set to 0. The resulting $Q$ is extended to the size of the original matrix by adding zeros and ones as needed.
+    \item The update is performed iteratively:
+    \[
+    A_1 = Q A_0 Q, \quad A_0 := A_1.
+    \]
+    \item This transformation produces a Hessenberg matrix similar to the original matrix.
+    \item Once the matrix is in Hessenberg form, the QR algorithm is applied to compute eigenvalues. For large matrices, the sparsity of the Hessenberg form accelerates convergence.
+    \item The C code for this algorithm is available at:
+    \href{https://github.com/Pratheek39/EE1030/blob/120977af296ad194235d07bdbaafdb19f6b0e856/QR/main.c}{GitHub}.
 \end{itemize}
 
 \section{Time Complexity Analysis}
-The time complexity of the Householder transform is $O(n^3)$, while the QR algorithm has a time complexity of $O(kn^3)$, where $k$ is the number of iterations. Combining these two methods reduces the operations per QR iteration and accelerates convergence (reduces $k$).
+The Householder transformation has a time complexity of $O(n^3)$, and the QR algorithm has $O(k \cdot n^3)$ complexity. Combining the two reduces the number of operations per QR iteration and accelerates convergence by minimizing $k$.
 
 \section{Convergence Rate and Space Complexity}
-The convergence of the QR algorithm is linear. The rate of convergence depends linearly on the ratio of the two largest eigenvalues. If 
+The convergence rate of the QR algorithm is linear. The convergence rate depends on the ratio of the two largest eigenvalues. For eigenvalues:
 \[
 |\lambda_1| > |\lambda_2| > \dots > |\lambda_n|,
 \]
-the rate of linear convergence is proportional to $\frac{|\lambda_2|}{|\lambda_1|}$. The space complexity for both parts of the process is $O(n^2)$.
+the convergence rate is proportional to $\frac{|\lambda_2|}{|\lambda_1|}$. The space complexity is $O(n^2)$ for both parts of the process.
 
 \section{Comparison with Other Algorithms}
 \begin{itemize}
-    \item \textbf{Jacobi Method}: This method uses Givens rotations to zero out the off-diagonal elements. It is well-suited for symmetric matrices. However, its convergence is slower than that of the QR algorithm, and it becomes computationally expensive for larger matrices. The QR algorithm also handles non-symmetric matrices better.
-    \item \textbf{Power Iterations}: This algorithm is simple and computationally inexpensive but finds only the largest eigenvalue. In contrast, the QR algorithm computes all eigenvalues and converges faster.
-    \item \textbf{Divide and Conquer Algorithms}: These algorithms use recursion to divide a matrix into smaller matrices and then merge results. They are efficient for symmetric matrices but are generally more complex to implement and have higher space complexity.
-    \item Several other algorithms, like the Lanczos algorithm, exist and are generally simpler and less expensive than the QR algorithm. However, they are suitable only for finding one or a few eigenvalues, not all.
+    \item \textbf{Jacobi Method}: Uses Givens rotations to zero out off-diagonal elements. It is efficient for symmetric matrices but slower than the QR algorithm for larger matrices.
+    \item \textbf{Power Iteration}: Simple and computationally inexpensive but finds only the largest eigenvalue. The QR algorithm finds all eigenvalues and converges faster.
+    \item \textbf{Divide and Conquer Algorithms}: Recursively divide a matrix and merge results. They are efficient for symmetric matrices but complex to implement and have higher space complexity.
+    \item Other algorithms, like the Lanczos algorithm, are simpler and cheaper but only compute a subset of eigenvalues.
 \end{itemize}
 
 \section{Conclusion}
-To compute all eigenvalues of a matrix guaranteed to have real eigenvalues, the QR algorithm, combined with the Householder transformation to reduce the matrix to Hessenberg form, is generally more efficient and stable. It is particularly effective for dense matrices, where it outperforms other algorithms.
+To compute all eigenvalues of a matrix guaranteed to have real eigenvalues, the QR algorithm combined with the Householder transformation is efficient, stable, and particularly suitable for dense matrices.
+
 \end{document}
-ad{\hline} % Un-comment to draw line below header
-\thispagestyle{empty}   %For removing header/footer from page 1
 
-\begin{document}
-
-\begingroup  
-    \centering
-    \LARGE Matrix Therory\\
-    \LARGE Eigen Value Computation\\[0.5em]
-    
-    
-    \large Kotha Pratheek Reddy\par
-    \large ai24btech11019\par
-    
-\endgroup
-\rule{\textwidth}{0.4pt}
-\pointsdroppedatright   %Self-explanatory
-\printanswers
-\renewcommand{\solutiontitle}{\noindent\textbf{Ans:}\enspace}   %Replace "Ans:" with starting keyword in solution box
-
-\section{Algorithms}
-The chosen algorithm is a combination of \textbf{Householder transformation} and \textbf{QR algorithm} that finds that can all eigen values of a given matrix with only real eigen values.
-\subsection{QR Algorithm}
-\begin{itemize}
-    
-    \item This algorithm iteratively converts a matrix to another matrix that is similar to it by factoring it into a product of an orthogonal matrix $(Q)$ and an upper triangular matrix $(R)$ and updating the original matrix to the product $(RQ)$.
-    \begin{align*}
-        A_0 &= Q_0R_0 \\
-        A_1 &= R_0Q_0 \\
-        A_1 &= Q_2R_1 \\
-        A_2 &= R_1Q_1 \\
-            &\vdots \\
-        A_i &= R_{i-1}Q_{i-1} \\
-        A_i &= Q_iR_i \\ \\
-        A_{j+i} &= Q_j^{-1}A_jQ_j\\
-    \end{align*}
-    Since $Q$ is an orthogonal matrix, $Q^{-1}$ can be replaced with $Q^{\top}$
-    \begin{align*}
-        A_{j+1} &= Q_j ^{\top}A_jQ_j
-    \end{align*}
-    The eigen values of each $A_j$ will be the same as the original matrix due to their similarity.
-    \item The value of $Q$ are found through the Gram-Schmidt process from each vector the projections of vectors coming before it in the matrix are removed. It is then normalized such that norm of each column is set to 1.
-    \item The iteration is performed until the convergence of $A_j$. It will generally converge to triangular matrices whose the diagnol entries are their respective eigenvalues. The general time complexity of this method is of the order $O(k\cdot n^3)$ where $k$ is the number of iterations and $n$ is the size of the matrix.
-    
-\end{itemize}
-    \subsection{HouseHolder Transformation.}
-   \begin{itemize}
-   \item The QR algorithm works particularly well with Hessenberg matrices. Matrices having all entries below first sub diagonal as zero are called lower Hessenberg and those with zeros above first upper sub-diagonal are called upper Hessenberg matrices. It will also work well with other matrices but the computaion will become expensive.
-   
-       \item For larger matrices the efficiency can be improved by using Householder reflections with complexity of near $O(n^3)$ to change the matrix to a lower Hessenberg matrix.  QR algorithm can the be used on it. In this way the number of iterations significantly reduce while operating with densely filled matrices.
-       \item HouseHolder transformation basically involves finding of a matrix (symmetric and Orthogonal), which on multiplying with a vector reflecting it to an other required vector.For example, If a vector $\mathbf{v_1}$ is to be rotated to $\mathbf{v_2}$ ($\mathbf{v1}$ and $\mathbf{v2}$ should be of the same magnitude), if $\mathbf{u}$ is the unit vector along $\mathbf{{v_1} - {v_2}}$, the reflection can be carried out by,
-        pre-multiplying $\mathbf{v1}$ with $ Q = I - \mathbf{2uu^{T}}$.
-        The $Q$ we get here is both orthogonal and symmetric. So while using it we may skip the process of finding inverse as it is it's own inverse.
-        \item At each step $\mathbf{v_1}$ is chosen as a part of column of a given matrix and $\mathbf{v_2}$ will be a vector whose first element will be the  $||\mathbf{v_1}||$ and others zero. The vector $Q$ is found and is then is stretched to the size of original matrix by adding zeros in the off- diagonal entries and ones int the diagonal entries.
-        \item Let $Q$ be the stretched version of Houdeholder matrix of a certain row , the updation is iteratively done n times in this way
-        \begin{align*}
-            A_1 &= QA_0Q \\
-            A_0 &:= A_1
-        \end{align*}
-        This done because $Q = Q^{-1}$.
-       
-       \item In this way the matrix remains similar to the original matrix and also the elements lower than the first sub-diagonal are set to zero.
-       \item Once this results into a Hessenberg form , the QR algorithm can be used to find out the eigen values. Far larger matrices, the Hessenberg form will be much sparse and will lead to fastening of its convergence.
-   \end{itemize} 
-   \section{Time Complexity Analysis}
-   The time complexity of a Householder transform is $O(n^3)$ while that of QR algorithm is $O(kn^3)$ where $k$ is number of iterations. While using a combination of these two leads to reduced number of operations per QR iteration and also fastents the convergence (reduces $k$).
-   \section{Convergence Rate and Space Complexity }
-   The convergence for QR algorithm is linear. The rate of convergence will linearly depend upon the ratio of the two largest eigen values.
-   if $$|\lambda_1| > |\lambda_2| > \dots > |\lambda_n|$$
-   The rate of linear convergence will vary with $\frac{|\lambda_2|}{|\lambda_1|}$. The space complexity for both parts of the process will be $O(n^2)$. 
-   \section{Comparision with other Algorithms}
-   \begin{itemize}
-       \item \textbf{Jacobi Method}: This method uses Givens rotations to zero out the off-diagonal elements.It is well suited for symmetric matrices. The convergence of this algorithm is slower than the QR algorithm and it gets computaionally expensive for larger matrices. QR algorithm also handles the non-symmetric matrices better.
-       \item \textbf{Power iterations}: Although this algorithm is simple and computationally inexpensive it only finds the largest eigenvalue.
-       QR along with finding all eigenvalues also converges quickly.
-       \item \textbf{Divide and Conquer Algorithms}: Thies algorithms use recursions to divide a matrix into smaller matrices and then merge results. They are good for finding eigenvalues of symmetric matrices but are generally complicated to implement and have high space complexity.
-       Several other algorithms like Lanczos algorithm exist which are generally simpler and inexpensive than the QR algorithms, but the will not find all the eigen values. They will be particularly useful when only one or some of the eigenvalues are needed.
-   \end{itemize}
-   \section{Conclusion}
-   If it is required to calculate  all eigenvalues of a matrix which is guaranteed to have real eigenvalues, then the QR algorithm along with Householder transformation to make the matrix into a Hessenberg matrix is generally more efficient,stable and so is useful for matrices with dense and entries where it outperforms other algorithms.
-   
-\end{document}
