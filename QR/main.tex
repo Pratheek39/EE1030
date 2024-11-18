@@ -27,25 +27,44 @@
 \section{Algorithms}
 The chosen algorithm is a combination of the \textbf{Householder transformation} and the \textbf{QR algorithm}, which computes all eigenvalues of a given matrix guaranteed to have real eigenvalues.
 
-\subsection{QR Algorithm}
+\subsection{QR Algorithm with Gram-Schmidt Orthogonalization}
 \begin{itemize}
-    \item This algorithm iteratively transforms a matrix into another similar matrix by factoring it into a product of an orthogonal matrix $(Q)$ and an upper triangular matrix $(R)$. The original matrix is updated as the product $(RQ)$:
-    \begin{align*}
-        A_0 &= Q_0R_0, \\
-        A_1 &= R_0Q_0, \\
-        A_1 &= Q_1R_1, \\
-        A_2 &= R_1Q_1, \\
-            &\vdots \\
-        A_i &= R_{i-1}Q_{i-1}, \\
-        A_i &= Q_iR_i.
-    \end{align*}
-    \item Since $Q$ is orthogonal, $Q^{-1}$ is replaced with $Q^{\top}$. The iterative process becomes:
+    \item The QR algorithm iteratively transforms a matrix into another similar matrix by factoring it into an orthogonal matrix $(Q)$ and an upper triangular matrix $(R)$. This process can be expressed as:
     \[
-    A_{j+1} = Q_j^{\top}A_jQ_j.
+    A_0 = Q_0 R_0, \quad A_1 = R_0 Q_0, \quad A_1 = Q_1 R_1, \quad A_2 = R_1 Q_1, \quad \dots
     \]
-    The eigenvalues of $A_j$ remain the same as those of the original matrix due to similarity.
-    \item $Q$ is computed using the Gram-Schmidt process, where the projections of preceding vectors are removed from each column vector. Each column is then normalized so that the norm of the column is 1.
-    \item The iteration continues until $A_j$ converges to a triangular matrix, with diagonal entries representing the eigenvalues. The time complexity of this method is $O(k \cdot n^3)$, where $k$ is the number of iterations and $n$ is the matrix size.
+    Each step involves computing $Q$ and $R$ such that $A_j = Q_j R_j$ and updating the matrix as $A_{j+1} = R_j Q_j$. The similarity transformation $A_{j+1} = Q_j^{\top} A_j Q_j$ preserves the eigenvalues of the original matrix.
+
+    \item \textbf{Gram-Schmidt Orthogonalization} is used to compute the orthogonal matrix $Q$:
+    \begin{enumerate}
+        \item Consider the column vectors $\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n$ of the matrix $A$.
+        \item Compute the first orthogonal vector by normalizing $\mathbf{a}_1$:
+        \[
+        \mathbf{q}_1 = \frac{\mathbf{a}_1}{\|\mathbf{a}_1\|}.
+        \]
+        \item For each subsequent vector $\mathbf{a}_k$ (where $k = 2, 3, \dots, n$), remove the projections onto all previously computed orthogonal vectors $\mathbf{q}_1, \mathbf{q}_2, \dots, \mathbf{q}_{k-1}$:
+        \[
+        \mathbf{v}_k = \mathbf{a}_k - \sum_{i=1}^{k-1} \text{proj}_{\mathbf{q}_i} (\mathbf{a}_k),
+        \]
+        where
+        \[
+        \text{proj}_{\mathbf{q}_i} (\mathbf{a}_k) = \frac{\mathbf{q}_i^{\top} \mathbf{a}_k}{\mathbf{q}_i^{\top} \mathbf{q}_i} \mathbf{q}_i.
+        \]
+        \item Normalize the resulting vector $\mathbf{v}_k$ to obtain $\mathbf{q}_k$:
+        \[
+        \mathbf{q}_k = \frac{\mathbf{v}_k}{\|\mathbf{v}_k\|}.
+        \]
+        \item Repeat this process for all columns to construct the orthogonal matrix $Q = [\mathbf{q}_1, \mathbf{q}_2, \dots, \mathbf{q}_n]$.
+    \end{enumerate}
+
+    \item The upper triangular matrix $R$ is computed as:
+    \[
+    R = Q^{\top} A.
+    \]
+
+    \item The iteration continues until $A_j$ converges to an upper triangular matrix. The diagonal entries of this triangular matrix represent the eigenvalues of the original matrix.
+
+    \item The time complexity of the QR algorithm is $O(k \cdot n^3)$, where $k$ is the number of iterations and $n$ is the size of the matrix.
 \end{itemize}
 
 \subsection{Householder Transformation}
